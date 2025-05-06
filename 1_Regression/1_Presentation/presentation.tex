@@ -47,7 +47,7 @@
 
 \section{Bayes' Theorem}
 
-\begin{frame}{Probabilities and Notation~\cite{wikipedia-bayes-en}}
+\begin{frame}{Probabilities and Notation}
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{itemize}
@@ -65,7 +65,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Bayes' Theorem~\cite{wikipedia-bayes-en}}
+\begin{frame}{Bayes' Theorem}
     \begin{columns}
         \column{\kitthreecolumns}
         \begin{greenblock}{Mathematical rule for \textbf{inverting conditional
@@ -82,34 +82,94 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Bayes' Theorem -- Example~\cite{wikipedia-bayes-de}}
+\begin{frame}{Bayes' Theorem -- Example}
     Testing for an infection ($T$: test positive, $K$ infected people,
     $G$ healthy people)
-
+    \vfill
     \begin{itemize}
-        \setlength\itemsep{0.5em}
+        \setlength\itemsep{2em}
         \item Prevalence (people who get infected): $P(K) = 0.0002$
         \item Sensitivity (positive test if person is infected): $P(T|K) = 0.95$
         \item Specificity (positive test if person is healthy): $P(T|G) = 0.01$
         \item Amount of tested people: 100\,000
         \item What is the probability that a random positively tested person is
             actually infected?
-        \item Solution:
+        % \item Solution:
 
-            \begin{equation*}
-                P(K|T) = \frac{P(T|K) \cdot P(K)}{P(T)} = \frac{0.95 \cdot
-                0.0002}{0.95 \cdot 0.0002 + 0.01 \cdot 0.9998} \approx 0.0186
-            \end{equation*}
-            
-            with the probability for the positively tested people
+        %     \begin{equation*}
+        %         P(K|T) = \frac{P(T|K) \cdot P(K)}{P(T)} = \frac{0.95 \cdot
+        %         0.0002}{0.95 \cdot 0.0002 + 0.01 \cdot 0.9998} \approx 0.0186
+        %     \end{equation*}
 
-            \begin{equation*}
-                P(T) = P(T|K) \cdot P(K) + P(T|G) \cdot P(G)
-            \end{equation*}
+        %     with the probability for the positively tested people
+
+        %     \begin{equation*}
+        %         P(T) = P(T|K) \cdot P(K) + P(T|G) \cdot P(G)
+        %     \end{equation*}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Bayes' Theorem -- Example~\cite{wikipedia-bayes-de}}
+\begin{frame}{Bayes' Theorem -- Example}
+    Testing for an infection ($T$: test positive, $K$ infected people,
+    $G$ healthy people)
+    \vfill
+    \begin{columns}
+        \column{\kittwocolumns}
+            Prevalence $P(K) = 0.0002$
+        \column{\kittwocolumns}
+            Sensitivity $P(T|K) = 0.95$
+        \column{\kittwocolumns}
+            Specificity $P(T|G) = 0.01$
+    \end{columns}
+    \vfill
+    \begin{columns}
+        \column{\kittwocolumns}
+    \begin{tikzpicture}[
+  level 1/.style={sibling distance=50mm},
+  level distance=40mm,
+  edge from parent/.style={draw,-latex, line width=2pt},
+  every node/.style={draw, rectangle, minimum width=2cm, align=center, line
+  width=2pt}
+]
+\node {people total}
+    child {node {infected \\ 0.02\,\%}}
+    child {node {healthy \\ 99.98\,\%}};
+
+\end{tikzpicture}
+    
+        \column{\kittwocolumns}
+    \begin{tikzpicture}[
+  level 1/.style={sibling distance=50mm},
+  level distance=40mm,
+  edge from parent/.style={draw,-latex, line width=2pt},
+  every node/.style={draw, rectangle, minimum width=2cm, align=center, line
+  width=2pt}
+]
+\node {infected}
+    child {node {negative test \\ 5\,\%}}
+    child {node {positive test \\ 95\,\%}};
+
+\end{tikzpicture}
+
+    \column{\kittwocolumns}
+    \begin{tikzpicture}[
+  level 1/.style={sibling distance=50mm},
+  level distance=40mm,
+  edge from parent/.style={draw,-latex, line width=2pt},
+  every node/.style={draw, rectangle, minimum width=2cm, align=center, line
+  width=2pt}
+]
+\node {healthy}
+    child {node {positive test \\ 1\,\%}}
+    child {node {negative test \\ 99\,\%}};
+
+\end{tikzpicture}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Bayes' Theorem -- Example}
+    \begin{columns}
+        \begin{column}{0.7\textwidth}
     \centering
     \begin{tikzpicture}[
   level 1/.style={sibling distance=100mm},
@@ -129,6 +189,29 @@
     child {node {negative test \\ 98\,980}}
   };
 \end{tikzpicture}
+\end{column}
+\begin{column}{0.3\textwidth}
+    \begin{equation*}
+        P(K|T) = \frac{P(T|K) \cdot P(K)}{P(T)}
+    \end{equation*}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Bayes' Theorem -- Example}
+    \textbf{Solution:}
+    \vfill 
+    \begin{equation*}
+        P(K|T) = \frac{P(T|K) \cdot P(K)}{P(T)} = \frac{0.95 \cdot
+        0.0002}{0.95 \cdot 0.0002 + 0.01 \cdot 0.9998} \approx 0.0186
+    \end{equation*}
+    \vfill 
+    with the probability for the positively tested people
+    \vfill 
+    \begin{equation*}
+        P(T) = P(T|K) \cdot P(K) + P(T|G) \cdot P(G)
+    \end{equation*}
 \end{frame}
 
 \section{Data Types}
@@ -194,7 +277,7 @@
 
 \section{Regression}
 
-\begin{frame}{Linear Regression~\cite{Hastie-2009}}
+\begin{frame}{Linear Regression}
     \begin{columns}
         \column{\kitthreecolumns}
             \begin{itemize}
@@ -220,14 +303,14 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Linear Regression~\cite{Hastie-2009}}
+\begin{frame}{Linear Regression}
     \begin{columns}
         \column{\kitthreecolumns}
         \begin{greenblock}{Unique solution for the parameters:}
-        \begin{equation}
+        \begin{equation*}
             \hat{\beta} = (\boldsymbol{X}^{T} \boldsymbol{X})^{-1}
             \boldsymbol{X}^T \boldsymbol{y}
-        \end{equation}
+        \end{equation*}
     \end{greenblock}
         \begin{itemize}
             \setlength\itemsep{2em}
@@ -263,8 +346,8 @@
             \texttt{np.concatenate((ones\_array, train\_set), axis=1)}
         \item Calculate $\hat{\beta}$ with the prepended training matrix and the
             targets: \\
-            Matrix multiplication: $\Rightarrow$ Numpy \texttt{np.matmul} \\
-        Invert matrix: $\Rightarrow$ \texttt{np.linalg.inv} or \texttt{@} \\
+            Matrix multiplication: $\Rightarrow$ Numpy \texttt{np.matmul} or \texttt{@} \\
+        Invert matrix: $\Rightarrow$ \texttt{np.linalg.inv} \\
         Transpose matrix: $\Rightarrow$ \texttt{matrix.T}
     \end{itemize}
 \end{frame}
@@ -319,6 +402,11 @@
 \beginbackup
 
 \begin{frame}{Literature}
+    \begin{itemize}
+        \item Linear Regression~\cite{Hastie-2009}
+        \item Bayes' theorem and probabilities~\cite{wikipedia-bayes-en,
+            wikipedia-bayes-de}
+    \end{itemize}
     \printbibliography
 \end{frame}
 
