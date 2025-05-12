@@ -303,14 +303,34 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Linear Regression}
+\begin{frame}{Linear Regression -- Matrix Notation}
+    \begin{itemize}
+        \setlength\itemsep{2em}
+        \item Write the input vectors of the features $X_j$ as a matrix
+            $\boldsymbol{X}$ of shape $N \times p$ ($N$: number, $p$ length of
+            input vectors)
+        \item Include intersect (bias) $\beta_0$ in the feature matrix
+            $\boldsymbol{X}$ as a column of ones $\Rightarrow$ new shape: $N
+            \times (p+1)$
+        \item $y$: $N$-vector of outputs in the training set
+        \item RSS can be expressed as:
+
+            \begin{equation*}
+                \text{RSS}(\beta) = (\boldsymbol{y} - \boldsymbol{X} \beta)^T
+                (\boldsymbol{y} - \boldsymbol{X} \beta)
+            \end{equation*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Linear Regression -- Parameters}
     \begin{columns}
         \column{\kitthreecolumns}
-        \begin{greenblock}{Unique solution for the parameters:}
-        \begin{equation*}
-            \hat{\beta} = (\boldsymbol{X}^{T} \boldsymbol{X})^{-1}
-            \boldsymbol{X}^T \boldsymbol{y}
-        \end{equation*}
+        \begin{greenblock}{Minimizing the RSS in the matrix form leads to a
+            unique solution for the parameters:}
+                \begin{equation*}
+                    \hat{\beta} = (\boldsymbol{X}^{T} \boldsymbol{X})^{-1}
+                    \boldsymbol{X}^T \boldsymbol{y}
+                \end{equation*}
     \end{greenblock}
         \begin{itemize}
             \setlength\itemsep{2em}
@@ -324,10 +344,9 @@
         Exercise:
         \begin{itemize}
             \setlength\itemsep{2em}
-            \item Features $X$: medical information (ten columns)
-            \item Target $Y$: diabetes or not
-            \item $\boldsymbol{X}$: $(N_\text{test} \times 11)$, first column
-                consisting of ones 
+            \item Features $\boldsymbol{X}$: medical information
+                ($N_\text{test} \times 11$, first column consisting of ones)
+            \item Target $\boldsymbol{y}$: diabetes or not ($N_\text{test}$)
         \end{itemize}
     \end{columns}
 \end{frame}
@@ -403,11 +422,14 @@
 
 \begin{frame}{Literature}
     \begin{itemize}
-        \item Linear Regression~\cite{Hastie-2009}
-        \item Bayes' theorem and probabilities~\cite{wikipedia-bayes-en,
+        \setlength\itemsep{2em}
+        \item Linear Regression~\nocite{Hastie-2009}
+            \printbibliography[keyword={hastie},title={Linear Regression}]
+        \item Bayes' theorem and probabilities~\nocite{wikipedia-bayes-en,
             wikipedia-bayes-de}
+            \printbibliography[keyword={bayes}, title={Bayes' theorem and
+            probabilities}]
     \end{itemize}
-    \printbibliography
 \end{frame}
 
 \backupend
