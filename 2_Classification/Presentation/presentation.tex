@@ -1,0 +1,131 @@
+%% Beispiel-Präsentation mit LaTeX Beamer im KIT-Design
+%% entsprechend den Gestaltungsrichtlinien vom Februar 2025
+%%
+%% Siehe https://sdq.kastel.kit.edu/wiki/Dokumentvorlagen
+
+%% Beispiel-Präsentation
+\documentclass[
+                en,
+                % kitgrid
+                ]{sdqbeamer} 
+ 
+%% Gruppenlogo, muss im Verezeichnis logos/ liegen
+%% falls kein Gruppenlogo gewünscht, bitte \grouplogo{} aufrufen
+\grouplogo{} 
+
+%% Gruppenname und Breite (Standard: 89 mm)
+\groupname{Institute for Physical Chemistry}
+%\groupnamewidth{89mm}
+
+% Beginn der Präsentation
+
+\title[Ex. 2: Regression]{Maschinelles Lernen für die Chemie - Exercise 2}
+\subtitle{Bayes' Theorem, Data Types and Regression}
+\author[L. Pfeffer, M. Vogelbacher]{Leonie Pfeffer, Maike Vogelbacher}
+
+\date[\today]{\today}
+
+% Literatur 
+ 
+\usepackage[citestyle=numeric,bibstyle=numeric,hyperref,backend=biber]{biblatex}
+\addbibresource{presentation.bib}
+\bibhang1em
+
+\usepackage{lipsum}
+\usepackage{ulem}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+\begin{document}
+
+%Titelseite
+\begin{frame}[title blue vertical, picture=images/banner_2020_kit.jpg]
+% \begin{frame}[title blue vertical, picture=images/palladio_bauplan]
+	\titlepage
+\end{frame}
+
+\section{Exercise}
+
+\begin{frame}{Pandas Methods}
+    \textbf{\texttt{pandas.DataFrame.value\_counts()}}
+    \begin{itemize}
+        \item Count the number of occurrences of each unique value in a
+            DataFrame
+    \end{itemize}
+    \vfill
+    \textbf{\texttt{pandas.DataFrame.info()}}
+    \begin{itemize}
+        \item Print summary of the DataFrame
+        \item Similar to \texttt{pandas.DataFrame.describe()}
+    \end{itemize}
+    \vfill
+    \textbf{\texttt{pandas.DataFrame.copy()}}
+    \begin{itemize}
+        \item Copy selected sub-DataFrames (e. g. columns) to a new DataFrame
+            variable
+        \item Changes in the copy will not influence the copy (default behavior)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Pair Plot}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \textbf{\texttt{sns.pairplot(DataFrame, hue="labels")}}
+            \begin{itemize}
+                \item Easy way to look at obvious correlations between different
+                    features
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[width=0.8\textwidth]{./images/pairplot_iris.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Scaling Input Data}
+    \textbf{Scikit-learn \texttt{StandardScaler}}
+    \begin{itemize}
+        \setlength\itemsep{2em}
+        \item Scale data to a mean value of $\mu = 0$ and standard deviation of
+            $\sigma = 1$
+            \begin{equation*}
+                x_\text{scaled} = \frac{x - \mu}{\sigma}
+            \end{equation*}
+        \item Create a StandardScaler instance: \\
+            \texttt{scaler: StandardScaler = StandardScaler()}
+        \item Compute the mean and standard deviation for each column for the
+            scaling in the next step: \\
+            \texttt{scaler.fit(training\_data)}
+        \item Actual standardization: \\
+            \texttt{training\_data\_scaled = scaler.transform(training\_data)}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Confusion Matrix}
+    \textbf{\texttt{confusion\_matrix(y\_true, y\_predicted)}}
+
+    \centering{}
+    \includegraphics[width=0.5\textwidth]{./images/cm_iris.png}
+\end{frame}
+
+\appendix
+% Slides here will not be counted in the page numbering nor will they
+% appear in the navigation bar
+\beginbackup
+
+% \begin{frame}{Literature}
+%     \begin{itemize}
+%         \setlength\itemsep{2em}
+%         \item Linear Regression~\nocite{Hastie-2009}
+%             \printbibliography[keyword={hastie},title={Linear Regression}]
+%         \item Bayes' theorem and probabilities~\nocite{wikipedia-bayes-en,
+%             wikipedia-bayes-de}
+%             \printbibliography[keyword={bayes}, title={Bayes' theorem and
+%             probabilities}]
+%     \end{itemize}
+% \end{frame}
+
+\backupend
+\end{document}
