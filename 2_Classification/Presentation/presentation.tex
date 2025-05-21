@@ -19,8 +19,8 @@
 
 % Beginn der Präsentation
 
-\title[Ex. 2: Regression]{Maschinelles Lernen für die Chemie - Exercise 2}
-\subtitle{Bayes' Theorem, Data Types and Regression}
+\title[Ex. 3: Classification]{Maschinelles Lernen für die Chemie - Exercise 3}
+\subtitle{Logistic Regression, Support Vector Machines}
 \author[L. Pfeffer, M. Vogelbacher]{Leonie Pfeffer, Maike Vogelbacher}
 
 \date[\today]{\today}
@@ -34,6 +34,7 @@
 \usepackage{lipsum}
 \usepackage{ulem}
 \usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{arg\,max}
 \usepackage{tikz}
 \usetikzlibrary{trees}
 
@@ -44,6 +45,179 @@
 % \begin{frame}[title blue vertical, picture=images/palladio_bauplan]
 	\titlepage
 \end{frame}
+
+\section{Logistic Regression}
+
+\begin{frame}{Logistic Regression for Classification}
+    \begin{greenblock}{Definition}
+        \begin{itemize}
+            \item Supervised learning
+            \item Predict categorical outcomes
+                \begin{itemize}
+                    \item Binary classification: yes/no, 1/0
+                    \item Multiple classes
+                \end{itemize}
+        \end{itemize}
+    \end{greenblock}
+    \begin{columns}
+        \column{\kitthreecolumns}
+        \begin{greenblock}{Goal}
+            Predict the probability that a sample $x$ belongs to class 1
+            \begin{equation*}
+                P(y = 1 \mid x)
+            \end{equation*}
+            \begin{itemize}
+                \item $x \in \mathbb{R}$: a single input feature
+                \item $y \in \{0, 1\}$: target class label
+            \end{itemize}
+        \end{greenblock}
+
+        \column{\kitthreecolumns}
+        \begin{greenblock}{Decision Rule}
+            Binary classification with decision boundary at $0.5$
+            \begin{equation*}
+                \hat{y} =
+                \begin{cases}
+                1 & \text{if } P(y = 1 \mid x) \geq 0.5 \\
+                0 & \text{otherwise}
+                \end{cases}
+            \end{equation*}
+        \end{greenblock}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Sigmoid Function}
+    \begin{columns}
+        \column{\kitthreecolumns}
+        \begin{greenblock}{a.k.a logistic function}
+            \begin{equation*}
+                P(y = 1 \mid x) = \frac{1}{1 + \exp[-(wx + b)]}
+            \end{equation*}
+            \begin{itemize}
+                \item $w$: weight (slope)
+                \item $b$: bias (intercept)
+            \end{itemize}
+        \end{greenblock}
+
+        \column{\kitthreecolumns}
+        \includegraphics[width=\textwidth]{images/Exam_pass_logistic_curve.png}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Multi-class Classification: Multinomial Regression}
+    \begin{columns}
+        \column{\kitthreecolumns}
+        \begin{greenblock}{Example: Iris Dataset}
+            \begin{itemize}
+                \item $n = 150$ samples
+                \item $d = 4$ features (sepal length/width, petal length/width)
+                \item $K = 3$ classes (setosa, versicolor, virginica)
+                \item $\boldsymbol{x}^{(i)} \in \mathbb{R}^2$ is the feature
+                    vector for the $i^{th}$ sample
+                \item $\boldsymbol{x}^{(i)} \in \{0, 1, 2\}$ is the class label
+                    for the $i^{th}$ sample
+            \end{itemize}
+        \end{greenblock}
+
+        \column{\kitthreecolumns}
+
+        \begin{greenblock}{Multinomial Regression (softmax)}
+            \textbf{Idea:} learn a single model with one set of weights per
+            class, all weights are learned simultaneously
+            \begin{equation*}
+                P(y = k \mid \boldsymbol{x}) = \frac{\exp[-(\boldsymbol{w}_k^T
+                \boldsymbol{x})]}{\sum_j \exp[-(\boldsymbol{w}_j^T
+            \boldsymbol{x})]}
+            \end{equation*}
+            \begin{itemize}
+                \item Weights: $W \in \mathbb{R}^{3 \times 4}$, where row $k$ is
+                    $\boldsymbol{w}_k^T$
+                \item Bias: $\boldsymbol{b} \in \mathbb{R}^3$
+                \item $i \in \{1, ..., 150\}$
+                \item Result: single vector of three class probabilities,
+                    summing to 1
+            \end{itemize}
+        \end{greenblock}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Multi-class Classification: One-vs-Rest}
+    \begin{columns}
+        \column{\kitthreecolumns}
+        \begin{greenblock}{Example: Iris Dataset}
+            \begin{itemize}
+                \item $n = 150$ samples
+                \item $d = 4$ features (sepal length/width, petal length/width)
+                \item $K = 3$ classes (setosa, versicolor, virginica)
+                \item $\boldsymbol{x}^{(i)} \in \mathbb{R}^2$ is the feature
+                    vector for the $i^{th}$ sample
+                \item $\boldsymbol{x}^{(i)} \in \{0, 1, 2\}$ is the class label
+                    for the $i^{th}$ sample
+            \end{itemize}
+        \end{greenblock}
+
+        \column{\kitthreecolumns}
+
+        \begin{greenblock}{One-vs-Rest (sigmoid)}
+            \textbf{Idea:} train $K$ separate binary classifiers, one for each
+            class $k$, to distinguish class $k$ from all others
+            \begin{equation*}
+                P(y = k \mid \boldsymbol{x}^{(i)}) = \frac{1}{1 +
+                \exp[-(\boldsymbol{w}_k^T \boldsymbol{x}^{(i)} + b_k)]}
+            \end{equation*}
+
+            \begin{itemize}
+                \item Weights: $\boldsymbol{w}_k \in \mathbb{R}^4$
+                \item Bias: $b_k \in \mathbb{R}$
+                \item $i \in \{1, ..., 150\}$
+                \item Result: three scalar probabilities per sample
+            \end{itemize}
+        \end{greenblock}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Exercise: One-vs-Rest Regression}
+    \begin{columns}
+        \column{\kitthreecolumns}
+        \begin{greenblock}{Training}
+            \textbf{Create new labels}
+            \begin{equation*}
+                y^{(i)} =
+                \begin{cases}
+                1 & \text{if original class is}~k\\
+                0 & \text{otherwise}
+                \end{cases}
+            \end{equation*}
+            \textbf{Cross-entropy loss function}
+            \begin{equation*}
+                \mathcal{L}_k = - \sum_{i=1}^{n} \left[ y_k^{(i)}
+                \log(\hat{y}_k^{(i)}) + (1-y_k^{(i)}) \log(1-\hat{y}_k^{(i)}) \right]
+            \end{equation*}
+            \begin{itemize}
+                \item Typical for classification
+                \item Can be optimized well due to global minimum
+            \end{itemize}
+        \end{greenblock}
+
+        \column{\kitthreecolumns}
+        \begin{greenblock}{Prediction}
+            \textbf{Predictor for each class $k$}
+            \begin{equation*}
+                \hat{y}_k = \frac{1}{1 + \exp[-(\mathbf{w}_k^T \mathbf{x} +
+                b_k)]}
+            \end{equation*}
+            \textbf{Select classifier with highest probability}
+            \begin{equation*}
+                \hat{y} = \argmax_k \hat{y}_k
+            \end{equation*}
+            
+        \end{greenblock}
+    \end{columns}
+\end{frame}
+% logistic function and its parameters
+% example for 1D and nD -> multinomial logistic regression, OvR
+% cross-entropy loss function
+
 
 \section{Exercise}
 
