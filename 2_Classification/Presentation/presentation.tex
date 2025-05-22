@@ -330,7 +330,14 @@
     \begin{itemize}
         \item Copy selected sub-DataFrames (e. g. columns) to a new DataFrame
             variable
-        \item Changes in the copy will not influence the copy (default behavior)
+        \item Changes in the original will not influence the copy (default behavior)
+    \end{itemize}
+    \vfill
+    \textbf{\texttt{pandas.DataFrame.dropna()}}
+    \begin{itemize}
+        \item Remove missing values (NaNs)
+        \item \texttt{axis=0}: rows containing missing values are removed,
+            \texttt{axis=1}: columns are removed
     \end{itemize}
 \end{frame}
 
@@ -369,11 +376,38 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Logistic Regression}
+    \textbf{Scikit-learn \texttt{LogisticRegression} class}
+    \begin{itemize}
+        \setlength\itemsep{2em}
+        \item Create a model \\
+            \texttt{model: LogisticRegression = LogisticRegression()}
+        \item Fit the model to the training set \\
+            \texttt{model.fit(training\_data, training\_labels)}
+        \item Make predictions \\
+            \texttt{model.predict(test\_data)}
+        \item Test the predictions, for example with the accuracy score \\
+            \texttt{metrics.accuracy\_score(test\_labels, predicted\_labels)}
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{Confusion Matrix}
     \textbf{\texttt{confusion\_matrix(y\_true, y\_predicted)}}
 
     \centering{}
     \includegraphics[width=0.5\textwidth]{./images/cm_iris.png}
+\end{frame}
+
+\begin{frame}{Support Vector Machine}
+    \textbf{Scikit-learn \texttt{SVC} class}
+    \begin{itemize}
+        \setlength\itemsep{2em}
+        \item Create a model with the RBF kernel, regularization parameter
+            \texttt{C=2} and scaling factor \texttt{gamma=2} \\
+            \texttt{model: SVC = SVC(kernel="rbf", C=2, gamma=2)}
+        \item Training, predicting and testing works like for logistic
+            regression
+    \end{itemize}
 \end{frame}
 
 \appendix
