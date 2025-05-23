@@ -281,35 +281,68 @@
     \end{columns}
 \end{frame}
 
-% SVC: support vector classifier, no kernel, no transformation of data
-% SVM: support vector machines, with kernel and transformation, then the SVC can
-% split the data
+\begin{frame}{Polynomial Kernel}
+    \begin{columns}
+        \column{\kitthreecolumns}
+        \begin{greenblock}{Equation}
+            \begin{equation*}
+                K(x, x^\prime) = (1 + \langle x, x^\prime \rangle )^d
+            \end{equation*}
+            \begin{itemize}
+                \setlength\itemsep{2em}
+                \item Degree $d$ (hyperparameter)
+                \item Dot product between the two features $x$ and $x^\prime$: $\langle
+                    x, x^\prime \rangle$
+            \end{itemize}
+        \end{greenblock}
 
-% 1 start with the data in a relatively low dimension
-% 2 move the data to a higher dimension
-% 3 find a SVC that separates the higher dimensional data into two groups
+        \column{\kitthreecolumns}
+        \begin{center}
+            \includegraphics[width=0.7\textwidth]{images/Polynomial_kernel.png}
+        \end{center}
+    \end{columns}
+\end{frame}
 
-% kernel functions: systematically find SVCs in higher dimensions
-% example polynomial kernel: increases dimensions by changing the degree and
-% calculating the relation between all data points to find a SVC,
-% cross-validation: find good value for d
-% example: radial basis function (RBF) kernel, finds SVCs in infinite dimensions
+\begin{frame}{Radial Basis Function (RBF)}
+    \begin{columns}
+        \column{\kitthreecolumns}
+        \begin{greenblock}{Equation}
+            \begin{equation*}
+                K(x, x^\prime) = \exp(-\gamma \Vert x-x^\prime \Vert^2)
+            \end{equation*}
 
-% polynomial kernel: (a \times b + r)^d, a, b are observations, r is the
-% coefficient, d the degree
-% get high dimensional relationships by just plugging the observations into the
-% kernel, the transformation is not needed
+            \begin{itemize}
+                \setlength\itemsep{2em}
+                \item a.\,k.\,a. radial kernel or Gaussian kernel
+                \item Squared Euclidean distance: $\Vert x-x^\prime \Vert = \sum_i (x_i
+                    - x_i^\prime)^2$
+                \item Width of Gaussian: $\gamma > 0$ (how quickly does the similarity
+                    decay)
+            \end{itemize}
+        \end{greenblock}
 
-% RBF kernel: \exp(-\gamma (a-b)^2): behaves like a weighted nearest neighbors
-% model
-% squared distance, so influence is function of that and \gamma scales the
-% influence (the larger, the less influence)
-% infinite because exponential function can be expanded into an infinite taylor
-% series
+        \column{\kitthreecolumns}
+        \begin{greenblock}{Interpretation}
+            \begin{itemize}
+                \item Technically has infinite dimensions (exponential function
+                    can be expanded in a Taylor series of infinite terms)
+                \item When $x = x^\prime$ (identical data points), the kernel is
+                    $1$ (maximum similarity):
+                    \begin{equation*}
+                        K(x,x) = \exp(0) = 1
+                    \end{equation*}
+                \item As $\Vert x - x^\prime \Vert$ increases, $K(x, x^\prime)
+                    \rightarrow 0$
+                \item The smaller $\gamma$, the slower $K$ decays (wider
+                    influence)
+                \item The larger $\gamma$, the faster $K$ decays (narrower
+                    influence)
+            \end{itemize}
+        \end{greenblock}
 
-% kernel trick: calculate the relation between different features as if they
-% were in the higher dimension, transformation doesn't actually happen, makes
-% the infinite dimensions of the RBF kernel possible
+    \end{columns}
+\end{frame}
+
 
 \section{Exercise}
 
@@ -424,7 +457,9 @@
             \href{https://www.deeplearningbook.org/}{Deep Learning, Goodfellow,
             Bengio and Courville 2016} and
             \href{https://www.youtube.com/watch?v=efR1C6CvhmE}{StatQuest by Josh
-            Starmer}
+            Starmer} and
+            \href{https://link.springer.com/book/10.1007/978-0-387-84858-7}{The
+            Elements of Statistical Learning, Hastie, Tibshirani, Friedman}
     \end{itemize}
 \end{frame}
 
