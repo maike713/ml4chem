@@ -48,7 +48,7 @@
 \begin{document}
 
 %Titelseite
-\begin{frame}[title blue vertical, picture=images/banner_2020_kit.jpg]
+\begin{frame}[title blue vertical, picture=images/iris.jpg]
 % \begin{frame}[title blue vertical, picture=images/palladio_bauplan]
 	\titlepage
 \end{frame}
@@ -119,9 +119,9 @@
                 \item $n = 150$ samples
                 \item $d = 4$ features (sepal length/width, petal length/width)
                 \item $K = 3$ classes (setosa, versicolor, virginica)
-                \item $\boldsymbol{x}^{(i)} \in \mathbb{R}^2$ is the feature
+                \item $\boldsymbol{x}^{(i)} \in \mathbb{R}^4$ is the feature
                     vector for the $i^{th}$ sample
-                \item $\boldsymbol{x}^{(i)} \in \{0, 1, 2\}$ is the class label
+                \item $\boldsymbol{y}^{(i)} \in \{0, 1, 2\}$ is the class label
                     for the $i^{th}$ sample
             \end{itemize}
         \end{greenblock}
@@ -427,8 +427,15 @@
 \begin{frame}{Confusion Matrix}
     \textbf{\texttt{confusion\_matrix(y\_true, y\_predicted)}}
 
-    \centering{}
-    \includegraphics[width=0.5\textwidth]{./images/cm_iris.png}
+    \begin{columns}
+        \column{\kitthreecolumns}
+        \centering{}
+        \includegraphics[width=\textwidth]{./images/cm_iris.png}
+
+        \column{\kitthreecolumns}
+        \centering{}
+        \includegraphics[width=\textwidth]{images/cm_iris_cols.png}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Support Vector Machine}
